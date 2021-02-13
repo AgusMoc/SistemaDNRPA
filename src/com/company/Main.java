@@ -1,5 +1,6 @@
 package com.company;
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
@@ -24,12 +25,12 @@ El sistema debería:
  *permiter ingresar los datos de personas y automotores --> NO ESTA HECHO ... hice una bbdd de prueba
          */
 
-     // BBDD DE PERSONAS (para probar el sistema)
-        Persona pers1 = new Persona("Carlitos","254","Pampa y la vía");
-        Persona pers2 = new Persona("Nemo","666","Calle Wallabi 42");
-        Persona pers3 = new Persona("Agus","888854","mi casa");
-        Persona pers4 = new Persona("Pepe","1235","Florida");
-        Persona pers5 = new Persona("Ricky","1235sasa","Miameeee");
+        // BBDD DE PERSONAS (para probar el sistema)
+        Persona pers1 = new Persona("Carlitos", "254", "Pampa y la vía");
+        Persona pers2 = new Persona("Nemo", "666", "Calle Wallabi 42");
+        Persona pers3 = new Persona("Agus", "888854", "mi casa");
+        Persona pers4 = new Persona("Pepe", "1235", "Florida");
+        Persona pers5 = new Persona("Ricky", "1235sasa", "Miameeee");
 
         List<Persona> autorizadosCarlitos = new ArrayList<>();
         autorizadosCarlitos.add(pers2);
@@ -43,14 +44,14 @@ El sistema debería:
         List<Persona> autorizadosPepe = new ArrayList<>();
         autorizadosPepe.add(pers1);
         autorizadosPepe.add(pers2);
-        List<Persona>autorizadosRicky = new ArrayList<>();
+        List<Persona> autorizadosRicky = new ArrayList<>();
 
         // BBDD DE AUTOMOTORES (para probar el sistema)
-        Automotor autito = new Automotor( "nro3","ABC 123", pers1, "camion", "particular",autorizadosCarlitos);
-        Automotor coche = new Automotor( "nro3","DEF 132", pers2, "camion", "particular",autorizadosNemo);
-        Automotor autito2 = new Automotor( "nro2","GE3 353", pers3, "auto", "profesional",autorizadosAgus);
-        Automotor coche2 = new Automotor( "nro1","KJD 923", pers4, "moto", "particular",autorizadosPepe);
-        Automotor tutu = new Automotor( "nro2","NRL 198", pers5, "auto", "profesional",autorizadosRicky);
+        Automotor autito = new Automotor("nro3", "ABC 123", pers1, "camion", "particular", autorizadosCarlitos, LocalDate.of(2020, 02, 15));
+        Automotor coche = new Automotor("nro3", "DEF 132", pers2, "camion", "particular", autorizadosNemo, LocalDate.of(2018, 02, 14));
+        Automotor autito2 = new Automotor("nro2", "GE3 353", pers3, "auto", "profesional", autorizadosAgus, LocalDate.of(2015, 11, 14));
+        Automotor coche2 = new Automotor("nro1", "KJD 923", pers4, "moto", "particular", autorizadosPepe, LocalDate.of(2006, 05, 06));
+        Automotor tutu = new Automotor("nro2", "NRL 198", pers5, "auto", "profesional", autorizadosRicky, LocalDate.of(2001, 12, 05));
 
         List<Automotor> registros = new ArrayList<>();
         registros.add(autito);
@@ -62,50 +63,23 @@ El sistema debería:
         //1)Se desea poder listar todos los autos registrados en todas las seccionales.
 
         System.out.println("Los autos registrados en la DNRPA son: ");
-        for (Automotor y : registros){
-            if (y.getTipoAutomotor()=="auto") System.out.println(y.datosAutomotores()) ;
+        for (Automotor y : registros) {
+            if (y.getTipoAutomotor() == "auto") System.out.println(y.datosAutomotores());
         }
 
+        autito.cambiarDueño(pers5, LocalDate.of(2014, 02, 14));
         //2)Se desea poder listar a todos los propietarios (en orden alfabético) de camiones.
 
         System.out.println("Los propietarios de camiones registrados en la DNRPA son: ");
         List<String> aux = new ArrayList<>();
-        for (Automotor y : registros){
-            if (y.getTipoAutomotor()=="camion") aux.add(y.nombrePropietario());
+        for (Automotor y : registros) {
+            if (y.getTipoAutomotor() == "camion") aux.add(y.nombrePropietario());
         }
         Collections.sort(aux);
-        for (String x : aux){
-           System.out.println(x);
-        }
-
-
-
-
-
-        /* PRUEBAS VARIAS
-        JOptionPane.showMessageDialog(null, "Los automotores deben clasificarse como: particulares o profesionales. Limitese a eso");
-
-        System.out.println ("Empezamos el programa");
-        System.out.println ("Por favor introduzca una cadena por teclado:");
-        Scanner entradaEscaner = new Scanner (System.in); //Creación de un objeto Scanner
-        String entradaTeclado = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
-        System.out.println ("Entrada recibida por teclado es: \"" + entradaTeclado +"\"");
-
-
-        for (Vehiculo y : registros){
-            if (y.getTipoVehiculo()==entradaTeclado) System.out.println(y.tipoVehiculo) ;
-        }
-
-        //2)Se desea poder listar a todos los propietarios (en orden alfabético) de camiones.
-
-        List<String> aux2 = new ArrayList<>();
-        for (Vehiculo y : registros){
-            if (y.getTipoVehiculo()==entradaTeclado) aux2.add(y.nombrePropietario());
-        }
-        Collections.sort(aux2);
-        for (String x : aux2){
+        for (String x : aux) {
             System.out.println(x);
         }
-*/
+
     }
 }
+
